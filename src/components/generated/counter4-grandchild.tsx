@@ -4,7 +4,7 @@ import {
   useContext,
   useSignal,
   useTask$,
-} from "@builder.io/qwik";
+} from "@qwik.dev/core";
 import { childContext } from "./counter4-child";
 
 export default component$(() => {

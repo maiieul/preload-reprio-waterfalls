@@ -5,7 +5,7 @@ import {
   useSignal,
   useTask$,
   type Signal,
-} from "@builder.io/qwik";
+} from "@qwik.dev/core";
 import Counter4Child from "./counter4-child";
 
 export const CounterContext = createContextId<Signal<number>>("counter4");

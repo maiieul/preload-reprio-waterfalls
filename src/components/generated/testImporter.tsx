@@ -1,4 +1,4 @@
-import { component$, useSignal, useStyles$, useTask$ } from "@builder.io/qwik";
+import { component$, useSignal, useStyles$, useTask$ } from "@qwik.dev/core";
 import Test1 from "./test1";
 import Test2 from "./test2";
 import Test3 from "./test3";
@@ -8,9 +8,9 @@ import Test6 from "./test6";
 import Test7 from "./test7";
 import Test8 from "./test8";
 import Test9 from "./test9";
-import { useContent } from "@builder.io/qwik-city";
-import { Collapsible, Modal } from "@qwik-ui/headless";
+import { useContent } from "@qwik.dev/router";
 import { useTheme } from "./use-theme";
+import { Collapsible, Modal } from "../headless";
 
 export const testLogger = () => {
   console.log("testLogger");

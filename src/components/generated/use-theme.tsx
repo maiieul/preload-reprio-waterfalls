@@ -1,4 +1,4 @@
-import { useSignal, useTask$, useVisibleTask$ } from "@builder.io/qwik";
+import { useSignal, useTask$, useVisibleTask$ } from "@qwik.dev/core";
 
 export const useTheme = () => {
   const theme = useSignal("");

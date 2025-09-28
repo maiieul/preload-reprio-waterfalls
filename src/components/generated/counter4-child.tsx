@@ -6,7 +6,7 @@ import {
   useSignal,
   useTask$,
   type Signal,
-} from "@builder.io/qwik";
+} from "@qwik.dev/core";
 import { CounterContext } from "./counter4";
 import Counter4Grandchild from "./counter4-grandchild";
 
