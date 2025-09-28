@@ -29,5 +29,9 @@ export default function (opts: RenderToStreamOptions) {
     serverData: {
       ...opts.serverData,
     },
+    preloader: {
+      ssrPreloads: 0,
+      maxIdlePreloads: 1,
+    },
   });
 }
