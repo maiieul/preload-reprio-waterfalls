@@ -1,38 +1,96 @@
-import { component$, Slot, useStyles$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
-import type { RequestHandler } from "@builder.io/qwik-city";
-
-import Header from "../components/starter/header/header";
-import Footer from "../components/starter/footer/footer";
-
-import styles from "./styles.css?inline";
-
-export const onGet: RequestHandler = async ({ cacheControl }) => {
-  // Control caching for this request for best performance and to reduce hosting costs:
-  // https://qwik.dev/docs/caching/
-  cacheControl({
-    // Always serve a cached response by default, up to a week stale
-    staleWhileRevalidate: 60 * 60 * 24 * 7,
-    // Max once every 5 seconds, revalidate on the server to get a fresh version of this page
-    maxAge: 5,
-  });
-};
-
-export const useServerTimeLoader = routeLoader$(() => {
-  return {
-    date: new Date().toISOString(),
-  };
-});
+import { component$, Slot, useSignal, useStyles$ } from "@builder.io/qwik";
+import { Link, type DocumentHead } from "@builder.io/qwik-city";
 
 export default component$(() => {
-  useStyles$(styles);
+  useStyles$(`
+    .layout {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .header {
+      background-color: #1f2937;
+      color: white;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      color: #d1d5db;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toggle-text {
+      font-size: 0.875rem;
+    }
+
+    .main {
+      flex-grow: 1;
+    }
+  `);
+
+  const isSPA = useSignal(true);
+  const LinkCmp = isSPA.value ? Link : "a";
+
   return (
-    <>
-      <Header />
-      <main>
+    <div class="layout">
+      <header class="header">
+        <div class="container nav-container">
+          <nav class="nav">
+            <LinkCmp href="/">Home</LinkCmp>
+            <LinkCmp href="/form">Form</LinkCmp>
+            <LinkCmp href="/about">About</LinkCmp>
+            <LinkCmp
+              href="/counters"
+              onQVisible$={() => console.log("visible")}
+            >
+              Counters
+            </LinkCmp>
+          </nav>
+          <label class="toggle-label">
+            <input type="checkbox" bind:checked={isSPA} />
+            <span class="toggle-text">Use SPA links</span>
+          </label>
+        </div>
+      </header>
+
+      <main class="main container">
         <Slot />
       </main>
-      <Footer />
-    </>
+
+      {/* workaround: invisible Link to ensure qwik city context inclusion */}
+      <Link href="/" />
+    </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Preloader Test",
+};
