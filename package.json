@@ -28,6 +28,7 @@
     "qwik": "qwik"
   },
   "devDependencies": {
+    "@builder.io/qwik-labs": "github:QwikDev/qwik-labs-build#main",
     "@qwik-ui/headless": "^0.7.1",
     "@qwik.dev/core": "2.0.0-beta.9",
     "@qwik.dev/router": "2.0.0-beta.9",

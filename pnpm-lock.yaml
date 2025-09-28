@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@builder.io/qwik-labs':
+        specifier: github:QwikDev/qwik-labs-build#main
+        version: https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/e72d3f95654670ea828599f7506cecb0c3bd40c9(vite@7.1.7(@types/node@20.19.17)(yaml@2.8.1))(zod@3.25.48)
       '@qwik-ui/headless':
         specifier: ^0.7.1
         version: 0.7.1(@builder.io/qwik@1.16.1(vite@7.1.7(@types/node@20.19.17)(yaml@2.8.1)))
@@ -586,6 +589,14 @@ packages:
   '@babel/types@7.28.4':
     resolution: {integrity: sha512-bkFqkLhh3pMBUQQkpVgWDWq/lqzc2678eUyDlTBhRqhCHFguYYGM0Efga7tYk4TogG/3x0EEl66/OQ+WGbWB/Q==}
     engines: {node: '>=6.9.0'}
+
+  '@builder.io/qwik-labs@https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/e72d3f95654670ea828599f7506cecb0c3bd40c9':
+    resolution: {tarball: https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/e72d3f95654670ea828599f7506cecb0c3bd40c9}
+    version: 0.0.1
+    engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
+    peerDependencies:
+      vite: '>=5 <8'
+      zod: 3.25.48
 
   '@builder.io/qwik@1.16.1':
     resolution: {integrity: sha512-BL2pM9OxtYm9niye5xBir/Rrosi2itK0odkt9E9oGU8ohaZMgz+nNyPmtvAcwdlo+GTEbqUYAUVG9A/zUYEfCw==}
@@ -4931,7 +4942,7 @@ snapshots:
       '@babel/types': 7.28.4
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
-      jsesc: 3.0.2
+      jsesc: 3.1.0
 
   '@babel/helper-annotate-as-pure@7.27.3':
     dependencies:
@@ -5586,6 +5597,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
+
+  '@builder.io/qwik-labs@https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/e72d3f95654670ea828599f7506cecb0c3bd40c9(vite@7.1.7(@types/node@20.19.17)(yaml@2.8.1))(zod@3.25.48)':
+    dependencies:
+      vite: 7.1.7(@types/node@20.19.17)(yaml@2.8.1)
+      zod: 3.25.48
 
   '@builder.io/qwik@1.16.1(vite@7.1.7(@types/node@20.19.17)(yaml@2.8.1))':
     dependencies:

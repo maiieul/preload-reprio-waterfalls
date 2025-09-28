@@ -5,6 +5,7 @@ import {
   ServiceWorkerRegister,
 } from "@qwik.dev/router";
 import { RouterHead } from "./components/router-head/router-head";
+import { Insights } from "@qwik.dev/core/insights";
 
 import "./global.css";
 
@@ -23,6 +24,7 @@ export default component$(() => {
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
         <ServiceWorkerRegister />
+        <Insights />
       </head>
       <body lang="en">
         <RouterOutlet />

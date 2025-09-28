@@ -2,12 +2,13 @@
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
  */
-import { defineConfig, type UserConfig } from "vite";
+import { defineConfig, loadEnv, type UserConfig } from "vite";
 import { qwikVite } from "@qwik.dev/core/optimizer";
 import { qwikRouter } from "@qwik.dev/router/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
 import basicSsl from "@vitejs/plugin-basic-ssl";
+import { qwikInsights } from '@qwik.dev/core/insights/vite';
 
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
@@ -21,27 +22,34 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  * Note that Vite normally starts from `index.html` but the qwikCity plugin makes start at `src/entry.ssr.tsx` instead.
  */
 export default defineConfig(({ command, mode }): UserConfig => {
-
   let output: any = {};
-    output = {
-      entryFileNames: ({ name }: any) => {
-        if (name.startsWith('entry')) {
-          return '[name].js';
-        }
-        return `build/[name]-[hash].js`;
-      },
-      chunkFileNames: () => {
-        return `build/[name]-[hash].js`;
-      },
-      assetFileNames: `build/[name]-[hash].[ext]`,
-    };
+  output = {
+    entryFileNames: ({ name }: any) => {
+      if (name.startsWith("entry")) {
+        return "[name].js";
+      }
+      return `build/[name]-[hash].js`;
+    },
+    chunkFileNames: () => {
+      return `build/[name]-[hash].js`;
+    },
+    assetFileNames: `build/[name]-[hash].[ext]`,
+  };
   return {
     build: {
       rollupOptions: {
-        output: output
+        output: output,
       },
     },
-    plugins: [qwikRouter(), qwikVite(), tsconfigPaths(), basicSsl()],
+    plugins: [
+      qwikRouter(),
+      qwikVite({experimental: ["insights"]}),
+      tsconfigPaths(),
+      basicSsl(),
+      qwikInsights({
+        publicApiKey: loadEnv("", ".", "").PUBLIC_QWIK_INSIGHTS_KEY,
+      }),
+    ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
